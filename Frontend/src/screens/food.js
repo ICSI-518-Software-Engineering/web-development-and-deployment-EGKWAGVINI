@@ -64,6 +64,7 @@ function FoodSearch() {
   return (
     <div style={containerStyle}>
       <h1>Recipe Search</h1>
+      <h3>Search recepies like chicken soup,noodles,pasta..</h3>
       <div>
         <input
           type="text"
