@@ -63,7 +63,7 @@ function FoodSearch() {
 
   return (
     <div style={containerStyle}>
-      <h1>Food Search</h1>
+      <h1>Recipe Search</h1>
       <div>
         <input
           type="text"
