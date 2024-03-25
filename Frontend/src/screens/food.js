@@ -15,8 +15,8 @@ function FoodSearch() {
     width: '50%',
     padding: '10px',
     marginRight: '10px',
-    border: '2px solid #ddd',
-    borderRadius: '5px'
+    border: '4px solid rgb(224, 224, 224)',
+    borderRadius: '10px'
   };
 
   const buttonStyle = {
@@ -63,12 +63,12 @@ function FoodSearch() {
 
   return (
     <div style={containerStyle}>
-      <h1>Recipe Search</h1>
-      <h3>Search recepies like chicken soup,noodles,pasta..</h3>
+      <h1><b>RECIPE SEARCH</b></h1><br></br>
+      <h2><i>Search recipes like chicken soup,noodles,pasta..</i></h2><br></br>
       <div>
         <input
           type="text"
-          placeholder="Enter recipe keyword"
+          placeholder="Enter recipe which you are looking for"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           style={inputStyle}
