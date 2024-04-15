@@ -1,38 +1,38 @@
-// Registration.js
+// registration.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Registration = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  const handleSignup = (email, password) => {
-    setLoggedIn(true);
-  };
-
-  return (
-    <div>
-      {!loggedIn && <SignupPage onSignup={handleSignup} />}
-      <div style={styles.loginLink}>
-        <p>Already have an account? <Link to="/login" style={styles.link}>Login</Link></p>
-      </div>
-    </div>
-  );
-};
-
-const SignupPage = ({ onSignup }) => {
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSignup(email, password);
+    // Here you would typically handle the registration logic
+    // For simplicity, let's assume registration is successful if all fields are filled
+    if (username && email && password && confirmPassword) {
+      // Redirect to the login page
+      window.location.href = '/login'; // Redirect using window.location
+    } else {
+      // Handle incomplete registration
+      alert('Please fill in all fields');
+    }
   };
 
   return (
     <div style={styles.container}>
-      <h2>Signup</h2>
+      <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          style={styles.input}
+          required
+        />
         <input
           type="email"
           placeholder="Email"
@@ -59,10 +59,11 @@ const SignupPage = ({ onSignup }) => {
         />
         <input
           type="submit"
-          value="Signup"
+          value="Sign Up"
           style={styles.button}
         />
       </form>
+      <p>Already have an account? <Link to="/login">Login</Link></p>
     </div>
   );
 };
@@ -92,14 +93,6 @@ const styles = {
     border: 'none',
     borderRadius: '5px',
     cursor: 'pointer',
-  },
-  loginLink: {
-    textAlign: 'center',
-    marginTop: '20px',
-  },
-  link: {
-    textDecoration: 'none',
-    color: '#4caf50',
   },
 };
 
