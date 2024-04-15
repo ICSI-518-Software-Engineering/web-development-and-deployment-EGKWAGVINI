@@ -1,51 +1,32 @@
-// App.js
+// Registration.js
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-function Registration() {
+const Registration = () => {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [userData, setUserData] = useState(null);
 
-  const handleSignup = (username, password) => {
-    // Here you would typically send a request to your backend to create a new user
-    // For the sake of simplicity, let's just log the user in immediately
+  const handleSignup = (email, password) => {
     setLoggedIn(true);
-    setUserData({ username, password });
-  };
-
-  const handleLogin = (username, password) => {
-    // Here you would typically send a request to your backend to authenticate the user
-    // For the sake of simplicity, let's just log the user in immediately
-    setLoggedIn(true);
-    setUserData({ username, password });
-  };
-
-  const handleLogout = () => {
-    setLoggedIn(false);
-    setUserData(null);
   };
 
   return (
     <div>
-      {!loggedIn && (
-        <SignupPage onSignup={handleSignup} />
-      )}
-      {!loggedIn && (
-        <LoginPage onLogin={handleLogin} />
-      )}
-      {loggedIn && (
-        <UserInfoPage userData={userData} onLogout={handleLogout} />
-      )}
+      {!loggedIn && <SignupPage onSignup={handleSignup} />}
+      <div style={styles.loginLink}>
+        <p>Already have an account? <Link to="/login" style={styles.link}>Login</Link></p>
+      </div>
     </div>
   );
-}
+};
 
-function SignupPage({ onSignup }) {
-  const [username, setUsername] = useState('');
+const SignupPage = ({ onSignup }) => {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSignup(username, password);
+    onSignup(email, password);
   };
 
   return (
@@ -53,10 +34,10 @@ function SignupPage({ onSignup }) {
       <h2>Signup</h2>
       <form onSubmit={handleSubmit}>
         <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           style={styles.input}
           required
         />
@@ -65,6 +46,14 @@ function SignupPage({ onSignup }) {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          style={styles.input}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
           style={styles.input}
           required
         />
@@ -76,56 +65,7 @@ function SignupPage({ onSignup }) {
       </form>
     </div>
   );
-}
-
-function LoginPage({ onLogin }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onLogin(username, password);
-  };
-
-  return (
-    <div style={styles.container}>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          style={styles.input}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={styles.input}
-          required
-        />
-        <input
-          type="submit"
-          value="Login"
-          style={styles.button}
-        />
-      </form>
-    </div>
-  );
-}
-
-function UserInfoPage({ userData, onLogout }) {
-  return (
-    <div style={styles.container}>
-      <h2>Welcome, {userData.username}!</h2>
-      <p>This is your user information page.</p>
-      <button onClick={onLogout} style={styles.button}>Logout</button>
-    </div>
-  );
-}
+};
 
 const styles = {
   container: {
@@ -152,6 +92,14 @@ const styles = {
     border: 'none',
     borderRadius: '5px',
     cursor: 'pointer',
+  },
+  loginLink: {
+    textAlign: 'center',
+    marginTop: '20px',
+  },
+  link: {
+    textDecoration: 'none',
+    color: '#4caf50',
   },
 };
 
