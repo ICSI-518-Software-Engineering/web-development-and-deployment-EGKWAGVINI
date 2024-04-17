@@ -1,6 +1,5 @@
-// App.js
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import ProfileScreen from './screens/Profile.screen';
 import ComputationScreen from './screens/Computation.screen';
@@ -12,9 +11,9 @@ import Login from './screens/login';
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
-        <Route index element={<Registration />} />
+    <Route path="/" element={<Registration />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<LayoutScreen />}>
           <Route index element={<ProfileScreen />} />
@@ -23,7 +22,7 @@ const App = () => {
           <Route path="food" element={<FoodSearch />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 };
 
