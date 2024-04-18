@@ -19,7 +19,7 @@ const ComputationScreen = () => {
   const addBackend = async () => {
     if (frontEndNumbers.number1 !== "" && frontEndNumbers.number2 !== "") {
       try {
-        const response = await fetch('http://localhost:8080/addNumbers', {
+        const response = await fetch('http://ec2-18-117-195-78.us-east-2.compute.amazonaws.com/addNumbers', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
